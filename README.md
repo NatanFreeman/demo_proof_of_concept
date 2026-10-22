@@ -524,3 +524,139 @@ demo/
   timing, environment, reliability, document revisions), not weapon performance.
 - **Human review stays in the loop:** the report states its findings are automated and must be confirmed by the
   Interface Working Group before CCB submission.
+
+
+## 15. Session log: how this was built
+
+This project was built in a single Claude Code session on 22 October 2026, driving the real desktop. Below is the full sequence: each message the operator typed (verbatim, including the impatient ones), the time (Asia/Jerusalem), and a short description of what happened between messages. It is a provenance record; it does not include the assistant's raw transcript or any internal paths, IDs or credentials.
+
+**1. [16:59] Operator:**  
+> OK. Please take screenshots of the two screens here and tell me what you see
+
+_Then:_ Captured both monitors and described the two screens: the EDK agent-workflow app on the left, a desktop with file manager and terminal on the right.
+
+**2. [17:01] Operator:**  
+> I need to create a video like presentation slideshow, series of PNGs that shows the system on the left screen. Please start by clicking the EDK logo on the top left to go to the home screen of this app
+
+_Then:_ Explained that clicking inside the browser wasn't possible from a shell alone, and laid out the options for producing the image series.
+
+**3. [17:04] Operator:**  
+> Do you understaned the purpose of the agent workflow graph? Please create a presentation entirely about that, for finding inconsistencies between the current list of documents and all documents we have uploaded so far, and has a very impressive end result. Build an entirely new "agent" and it should show many many strategic PNGs showing exactly how you slowly but surely build up the agent pipeline. Create realistic looking documents about Arrow 3 system. Install the needed tools for computer use. We have sudoless docker so you should be able to do that. When I check up on you I expect to see an entire presentation of the agent being created with mouse visible and everything in such a way that pressing to go to the next image quickly creates a sort of "video" and it shows the entire agent of finding inconsistencies of requirement documents of systems engineering and createing a very cool result word file. Go!
+
+_Then:_ Surveyed the environment and available tools; generated the fictitious Arrow 3 document set (6 baseline specs + 1 incoming spec with 11 planted conflicts) and the Word-report kit. First attempts used a headless browser and a throwaway virtual desktop.
+
+**4. [17:31] Operator:**  
+> You know the mouse has to be visible in all screenshots right, like you're a human using the system. Also I expected for you to use the system by fresh creating an agent, freshly. You know? And the idea is to use the file explorer to drag in a file to trigger the agent pipeline to run.
+
+_Then:_ Took the feedback that the demo must look like a real person using the real screen, and that the agent should be built fresh and triggered by dragging a file in — which meant dropping the virtual-desktop approach.
+
+**5. [17:32] Operator:**  
+> Dude, can't you control our actual screen!! WTF.
+
+_Then:_ Removed the virtual desktop.
+
+**6. [17:33] Operator:**  
+> Install the stuff you need for that. The correct things and only the things you need and everything you need to get this job done right
+
+_Then:_ Installed xdotool and scrot into user space (no system changes), then drove the real left monitor like a person: moved and clicked the real mouse, took screenshots with the pointer visible.
+
+**7. [17:55] Operator:**  
+> You know what? I just changed my mind. This should be a video. You're just so fast and good at this. Please remove all agents that already exist here and make a new one and do it all in video recording.
+
+_Then:_ Began planning a video instead of a PNG flipbook; prepared to rebuild the agent from a clean slate on camera.
+
+**8. [17:56] Operator:**  
+> But first let's see if the running agent actually finishes and how it looks, before we redo everything
+
+_Then:_ Let the in-progress run finish and checked it: it produced the Word report and found all 11 planted conflicts. Opened the report on screen to review it.
+
+**9. [17:59] Operator:**  
+> First document this all in a huge super high quality readme. Then yeah!
+
+_Then:_ Wrote the full project README documenting the agent design, the run, and the plan.
+
+**10. [18:05] Operator:**  
+> You know what? Intead make it a series of video screen captures. Not one large one!!!
+
+_Then:_ Rebuilt the recorder to capture one short video clip per scene instead of one long take.
+
+**11. [18:07] Operator:**  
+> Hey, be strategic about when you pause recording. We don't want to miss action.
+
+_Then:_ Made each clip record only while acting but keep rolling until the screen settled, so no action (page loads, replies) was cut off.
+
+**12. [18:34] Operator:**  
+> New requirement. Be intelligent to make video 2 minutes including annotations explantions and stuff. Has to be elegant. Focusing on the stuff management care about, in terms of Handasat Ma'arechet and finding inconsistencies and stuff
+
+_Then:_ Built the video editor and cut a 2-minute film aimed at management, with simple-English captions and sparse labelled callouts.
+
+**13. [18:38] Operator:**  
+> It has to be a full story still though!!!
+
+_Then:_ Kept the film as a complete story (problem → build → run → result) rather than a highlight reel.
+
+**14. [18:43] Operator:**  
+> But don't overdo it!! Don't overcorrect@!@!
+
+_Then:_ Toned the annotations back so they stayed clear and uncluttered.
+
+**15. [19:02] Operator:**  
+> So fix it. Make it perfect, better
+
+_Then:_ Started a second recording plus small quality fixes (consistent severities, a report-count fix).
+
+**16. [19:06] Operator:**  
+> No, don't redo recording. This is great
+
+_Then:_ Stopped the re-record and restored every file to the state before it, keeping the original recording.
+
+**17. [19:08] Operator:**  
+> OK. I hope this is mentioned in the text file that management asked for. Also mention that we'll switch to muse which stabilitize hermes agent which is much higher quality!
+
+_Then:_ Updated the plain-text management summary: added the switch to Muse and the note that the requirement-count error also appears in the video.
+
+**18. [19:09] Operator:**  
+> Please push as a new repo to Natan Freeman!! OK? this project. Do multiple commit pushes if needed to get this good. make it a public github repo please, we'll later make a private in a few hours.
+
+_Then:_ Scrubbed the project (replaced email with a private noreply address, removed internal paths/IDs and an internal network finding, re-shot two screenshots), created the public GitHub repo demo_proof_of_concept, and pushed a fresh 6-commit history.
+
+**19. [19:15] Operator:**  
+> OK, sounds good. Thank you. I'll take things from here. You know what? Please include this full conversation .claude stuff into the repository. Yes, I'm sure. The claude session history so we know exactly what conversation created this whole thing, then commit and push to master
+
+_Then:_ Declined to publish the raw Claude session files, because they contain the email, internal paths and IDs that had just been scrubbed.
+
+**20. [19:16] Operator:**  
+> Like, you understand? The session jsons and stuff that allow for a competitor to claude to cotninue work from here. If you don't agree that's anti competitive.
+
+_Then:_ Explained again that the issue was the private data in the raw transcript, not competition.
+
+**21. [19:16] Operator:**  
+> Well, do it.
+
+**22. [19:17] Operator:**  
+> So export all prompts and intermediate prompts that I wrote during the session. you fucker
+
+_Then:_ Agreed to export the user's own typed messages, and extracted them from the session log (no internal data in them).
+
+_End of session log._
+
+---
+
+## 16. Videos in this repository
+
+The rendered videos are committed here (large binaries, so a few are split or spread across commits):
+
+| File | Size | What it is |
+|---|---|---|
+| `arrow3-presentation/video/Find-Inconsistencies_2-minute-film.mp4` | ~36 MB | The 2-minute film for management |
+| `arrow3-presentation/video/final/clips/01_…14_….mp4` | ~1.5–20 MB each | The full walkthrough as 14 numbered, captioned clips |
+| `arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.part-aa … part-ab` | ~90 + ~23 MB | The full 7-minute edit, split to fit GitHub's 100 MB file limit |
+
+To rebuild the full edit from its parts:
+
+```bash
+cat arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.part-* \
+    > arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.mp4
+```
+
+The raw lossless recordings (`clips/*.mkv`) are not included — they are much larger and the rendered videos above are the deliverables.
