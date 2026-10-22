@@ -1,0 +1,238 @@
+==========================================================================================
+  FIND INCONSISTENCIES IN REQUIREMENTS
+  An AI agent for systems engineering, built in EDK - what we did and what happened
+==========================================================================================
+
+  Date ......... 22 October 2026
+  System ....... EDK, "Build Your Own Agent" (internal network)
+  Documents .... Arrow 3 demo documents. All content is fictitious, made for this demo.
+  Video ........ Find-Inconsistencies_2-minute-film.mp4 (2 minutes)
+
+
+------------------------------------------------------------------------------------------
+  1. IN SHORT
+------------------------------------------------------------------------------------------
+
+  We built a new AI agent in EDK in a few minutes, with no code.
+
+  We gave it 6 approved Arrow 3 specifications (66 requirements). Then we dropped in one
+  new specification. We had hidden 11 conflicts in it.
+
+  After 4 minutes 26 seconds, the agent gave us a finished Word report:
+
+      * It found all 11 conflicts.
+      * It missed none.
+      * It reported nothing false. (0 false alarms)
+      * For each conflict it quoted both documents, explained the impact,
+        and suggested a fix, an owner and a due date.
+
+  We ran the full test twice on the same documents (a rehearsal and the recorded run).
+  Both times the agent found all 11 conflicts.
+
+
+------------------------------------------------------------------------------------------
+  2. THE PROBLEM WE WANT TO SOLVE
+------------------------------------------------------------------------------------------
+
+  In systems engineering, every new or updated specification must agree with the
+  documents that are already approved (the baseline): the system requirements, the
+  interface documents (ICDs), the other segment specifications, and the environment and
+  reliability requirements.
+
+  Today an engineer checks this by hand, requirement by requirement, across many
+  documents. This is slow, and it is easy to miss a conflict. A missed conflict is
+  usually found late - in a design review, in integration, or in testing - when it costs
+  much more to fix.
+
+
+------------------------------------------------------------------------------------------
+  3. WHAT WE BUILT
+------------------------------------------------------------------------------------------
+
+  The agent is a drawing of blocks and arrows in the EDK builder. No programming.
+  It has 16 blocks and two AI workers ("Hermes" agents):
+
+    START         When a new Word file (.docx) is uploaded, the agent starts by itself.
+
+    PART 1        A register of all approved requirements.
+                  The agent reads every approved document and keeps a list of all its
+                  requirements. Next time, it only re-reads documents that changed.
+
+    PART 2        A second AI agent works at the same time.
+                  It converts the new specification to text, finds every "shall"
+                  requirement in it (19 requirements), and writes a one-page summary for
+                  managers.
+
+    PART 3        Find conflicts.
+                  The main AI agent reads the register and the new requirements, and
+                  compares them one by one. The instructions are written in plain English,
+                  so anyone can read and change them.
+
+    PART 4        Word report.
+                  The findings become a formatted Word report with a cover page, a
+                  verdict, charts, a heat map, all findings side by side, and an action plan.
+
+
+------------------------------------------------------------------------------------------
+  4. THE TEST
+------------------------------------------------------------------------------------------
+
+  Approved documents (the baseline) - 6 documents, 66 requirements:
+
+      A3-SRS-001     Rev C   System Requirements Specification          18 requirements
+      A3-ICD-110     Rev C   Interceptor-Launcher ICD                   13 requirements
+      A3-LCH-SSS-040 Rev B   Launcher Segment Specification             12 requirements
+      A3-ENV-050     Rev B   Environmental and RAM Requirements         10 requirements
+      A3-FCR-SSS-020 Rev B   Fire Control Radar Specification            7 requirements
+      A3-BMC-SSS-030 Rev A   Battle Management Center Specification      6 requirements
+
+  New document:
+
+      A3-INT-SSS-010 Rev A   Interceptor Segment Specification (draft for PDR)
+                             19 requirements, with 11 hidden conflicts.
+
+  The conflicts are typical interface and requirement problems: power, data bus,
+  coordinate frames, timing, mass, environment, reliability, and old document revisions.
+
+
+------------------------------------------------------------------------------------------
+  5. THE RUN, MINUTE BY MINUTE
+------------------------------------------------------------------------------------------
+
+  Time from the moment we dropped the new file:
+
+    00:00   The new spec is dropped onto the agent. Both AI agents start at once.
+    00:00   Agent 1 builds the register: reads all 6 approved documents.
+    00:00   Agent 2 converts the new spec to text and finds its 19 requirements.
+    00:32   The register is ready (66 requirements).
+    00:43   Agent 2 is done with the conversion. Agent 1 can now continue.
+    00:43   Agent 1 studies the register and the new requirements together.
+            At the same time, Agent 2 writes the one-page summary for managers.
+    01:19   Agent 1 starts the comparison.
+    04:18   Comparison done: 11 conflicts, written in a structured list.
+    04:26   The Word report is ready (6 pages).
+
+  The AI model runs locally, on our own GPU server (Devstral, through EDK). The agent did
+  not use any cloud AI service.
+
+
+------------------------------------------------------------------------------------------
+  6. THE RESULT - ALL 11 CONFLICTS FOUND
+------------------------------------------------------------------------------------------
+
+  Verdict in the report: NOT READY FOR BASELINE.
+  4 critical, 6 major, 1 minor.
+
+  #   Severity   New spec says                    Approved document says         Where
+  --  ---------  -------------------------------  -----------------------------  ----------
+  1   Critical   Data link: Gigabit Ethernet      MIL-STD-1553B data bus         ICD-110
+  2   Critical   Coordinates: ECI (J2000)         WGS-84 ECEF                    SRS-001
+  3   Critical   Total mass up to 1,450 kg        Up to 1,350 kg                 ICD-110
+  4   Critical   Pre-launch current up to 18 A    Up to 12 A                     ICD-110
+  5   Major      Uses ICD-120 Rev A               ICD-120 Rev C is current       BMC-SSS-030
+  6   Major      Operates at -20 to +50 C         Must operate at -33 to +55 C   ENV-050
+  7   Major      MTBF at least 1,500 hours        At least 2,000 hours           ENV-050
+  8   Major      Storage life at least 10 years   At least 15 years              ENV-050
+  9   Major      READY report within 6.0 s        Within 3.0 s                   ICD-110
+  10  Major      Time sync within +/-10 us        Within +/-1 us                 ICD-110
+  11  Minor      EMC: MIL-STD-461F                MIL-STD-461G                   ENV-050
+
+  Most conflicts (5 of 11) are with the launcher interface document, ICD-110.
+  This is exactly where a systems engineer would want to look first.
+
+
+------------------------------------------------------------------------------------------
+  7. WHY THIS RUN IS IMPRESSIVE
+------------------------------------------------------------------------------------------
+
+  1. Complete and clean.
+     11 of 11 conflicts found. No false alarms. The same result in two separate runs.
+
+  2. It understands meaning, not only numbers.
+     Some conflicts have no number to compare. "Gigabit Ethernet" vs "MIL-STD-1553B"
+     and "ECI" vs "WGS-84 ECEF" are different words for different technical choices.
+     The agent understood that these cannot work together.
+
+  3. It connects documents, like an engineer.
+     It did not only compare two lines. It explained the effect on other documents:
+       * 18 A would trip the launcher's circuit breakers (Launcher spec, LCH-PWR-021).
+       * 1,450 kg is more than the launcher erector can lift (LCH-MEC-014).
+       * A 6-second READY time breaks the system reaction-time budget (SRS-TL-002)
+         and makes the launcher declare a "hang-fire".
+     These links were not written in the new spec. The agent found them in the baseline.
+
+  4. Fast.
+     4 minutes 26 seconds from new file to finished Word report, with no human work.
+     A careful manual check of 19 new requirements against 66 approved requirements in
+     6 documents usually takes much longer.
+
+  5. Easy to check.
+     Every finding quotes the exact text from both documents, with the requirement IDs.
+     An engineer can confirm each finding in seconds. People stay in control.
+
+  6. Ready for management.
+     The report gives a clear verdict, a count by severity, a heat map, and an action
+     plan with owners and due dates. It can go straight to an Interface Working Group or
+     a Configuration Control Board meeting.
+
+  7. Built without code, and easy to reuse.
+     The agent was built by drag and drop; the recorded build takes about 4 minutes.
+     It runs again by itself every time a new document is uploaded. The baseline
+     register updates itself.
+
+
+------------------------------------------------------------------------------------------
+  8. HONEST NOTES
+------------------------------------------------------------------------------------------
+
+  * Demo documents. The Arrow 3 documents are fictitious and the 11 conflicts were
+    planted by us. The next step is a test on real (unclassified) project documents.
+
+  * AI results can vary a little. Both runs found all 11 conflicts, but the severity
+    of 2 findings was different between runs (rehearsal: 5 critical / 5 major / 1 minor;
+    recorded run: 4 / 6 / 1). Engineers should confirm the severity. We plan to switch
+    to Muse, which makes the Hermes agent more stable (see section 9).
+
+  * Small number error, now fixed. The report cover says "69 requirements indexed".
+    The correct number is 66. You can also see "69" in the video, because the video
+    shows this report. The error was in our report tool: it counted 3 document numbers
+    as requirements. We fixed the tool after the run, so new reports show the right
+    number. The 11 findings were not affected.
+
+  * The second AI agent. It shows that agents can work in parallel, and it writes the
+    summary for managers. For this small test it saved only a little time. With many
+    documents, parallel work matters more.
+
+  * The agent supports engineers. It does not replace engineering review. The report
+    says this on its last page.
+
+
+------------------------------------------------------------------------------------------
+  9. SUGGESTED NEXT STEPS
+------------------------------------------------------------------------------------------
+
+  1. Switch to Muse. Muse makes the Hermes agent more stable and gives much higher
+     quality results.
+  2. Run the same agent on a real set of unclassified project documents.
+  3. Measure the time saved against a manual review of the same documents.
+  4. Add more document types (test plans, ICD tables in Excel) to the baseline.
+  5. Decide where the reports should go (Interface Working Group, CCB, document control).
+
+
+------------------------------------------------------------------------------------------
+  10. FILES
+------------------------------------------------------------------------------------------
+
+  arrow3-presentation/video/Find-Inconsistencies_2-minute-film.mp4
+        The 2-minute film for management.
+  arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.mp4
+        The full screen recording with captions (7 minutes).
+  arrow3-presentation/video/final/clips/
+        The same recording as 14 short, numbered clips.
+  arrow3-presentation/final-run/
+        The Word report (and PDF) from the recorded run, the list of findings,
+        the managers' summary, and the baseline register.
+  arrow3-docs/
+        The 6 approved documents and the new specification used in the test.
+
+==========================================================================================
