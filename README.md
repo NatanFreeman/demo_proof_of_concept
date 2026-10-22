@@ -642,21 +642,36 @@ _End of session log._
 
 ---
 
-## 16. Videos in this repository
+## 16. Videos and source footage in this repository
 
-The rendered videos are committed here (large binaries, so a few are split or spread across commits):
+The rendered videos and the raw footage to re-edit them are committed here. GitHub rejects any single file over
+100 MB, so the two large files are split into `.part*.bin` pieces that you rejoin with `cat`.
 
-| File | Size | What it is |
-|---|---|---|
-| `arrow3-presentation/video/Find-Inconsistencies_2-minute-film.mp4` | ~36 MB | The 2-minute film for management |
-| `arrow3-presentation/video/final/clips/01_…14_….mp4` | ~1.5–20 MB each | The full walkthrough as 14 numbered, captioned clips |
-| `arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.part-aa … part-ab` | ~90 + ~23 MB | The full 7-minute edit, split to fit GitHub's 100 MB file limit |
+**Rendered videos**
 
-To rebuild the full edit from its parts:
+| File | What it is |
+|---|---|
+| `arrow3-presentation/video/Find-Inconsistencies_2-minute-film.mp4` | The 2-minute film for management (~36 MB) |
+| `arrow3-presentation/video/final/clips/01_…14_….mp4` | The full walkthrough as 14 numbered, captioned clips |
+| `arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.mp4.part00.bin` + `.part01.bin` | The full 7-minute edit, split (rejoin below) |
+
+**Raw source footage and data (to re-edit)**
+
+| File | What it is |
+|---|---|
+| `arrow3-presentation/video/clips/??_*.mkv` | The lossless screen recordings, one per scene (pointer included) |
+| `arrow3-presentation/video/clips/11_run.mkv.part00.bin … part02.bin` | The run recording (204 MB), split (rejoin below) |
+| `arrow3-presentation/video/clips/*.events.tsv` | Per-clip caption/callout timings used by the editor |
+| `arrow3-presentation/video/run_state_raw.json`, `run_agent.json`, `run_summary.json`, `report_cover.png` | Run data and the end-card cover image |
+| `tools/rec.py`, `tools/edit.py`, `tools/story.py` | The recorder and the two editors that produced the videos |
+
+**Rejoin the split files**
 
 ```bash
-cat arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.part-* \
-    > arrow3-presentation/video/Find-Inconsistencies-in-Requirements_EDK-demo.mp4
+cd arrow3-presentation/video
+cat Find-Inconsistencies-in-Requirements_EDK-demo.mp4.part*.bin > Find-Inconsistencies-in-Requirements_EDK-demo.mp4
+cat clips/11_run.mkv.part*.bin > clips/11_run.mkv
 ```
 
-The raw lossless recordings (`clips/*.mkv`) are not included — they are much larger and the rendered videos above are the deliverables.
+To rebuild the videos from the raw footage: `python3 tools/story.py` (2-minute film) and `python3 tools/edit.py`
+(clips and full edit); both need numpy and Pillow. See section 8.
