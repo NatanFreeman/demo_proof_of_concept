@@ -1,0 +1,40 @@
+1792681984.112	start	The baseline register			
+1792681984.112	chapter	Baseline register: everything uploaded so far			
+1792681986.117	caption	Files: every specification uploaded so far	477	528	
+1792681986.117	motion	first input			
+1792681989.987	caption	Files: every specification uploaded so far	717	721	
+1792681989.991	caption	Files: every specification uploaded so far	717	721	70,640,300,330
+1792681991.420	caption	Files: every specification uploaded so far	217	703	70,640,300,330
+1792681992.147	caption	Files: every specification uploaded so far	217	703	70,640,300,330
+1792681993.302	caption	Files: every specification uploaded so far	217	792	70,640,300,330
+1792681993.703	caption	Files: every specification uploaded so far	217	792	70,640,300,330
+1792681994.408	caption	Filter: keep only the baseline	217	792	
+1792681998.136	caption	Filter: keep only the baseline	940	721	
+1792681998.140	caption	Filter: keep only the baseline	940	721	70,640,300,330
+1792681999.696	caption	Filter: keep only the baseline	217	703	70,640,300,330
+1792682000.272	caption	…not generated reports, not the new spec itself	217	703	70,640,300,330
+1792682001.447	caption	…not generated reports, not the new spec itself	217	824	70,640,300,330
+1792682001.952	caption	…not generated reports, not the new spec itself	217	824	70,640,300,330
+1792682002.656	caption	Pipe the files into the Filter (dashed arrow)	217	824	
+1792682005.254	caption	Pipe the files into the Filter (dashed arrow)	930	740	
+1792682005.257	caption	Index: the living baseline register	930	740	
+1792682008.653	caption	Index: the living baseline register	940	537	
+1792682008.656	caption	Index: the living baseline register	940	537	70,640,300,330
+1792682010.218	caption	Index: the living baseline register	217	703	70,640,300,330
+1792682010.970	caption	Each entry: every requirement of every document	217	703	70,640,300,330
+1792682012.137	caption	Each entry: every requirement of every document	217	790	70,640,300,330
+1792682014.272	caption	Kept up to date: only new or changed documents are re-read	217	790	70,640,300,330
+1792682015.459	caption	Kept up to date: only new or changed documents are re-read	217	941	70,640,300,330
+1792682016.323	caption	Kept up to date: only new or changed documents are re-read	217	941	70,640,300,330
+1792682017.727	caption	Hermes' first step: update the register (solid arrow)	217	941	
+1792682020.421	caption	Hermes' first step: update the register (solid arrow)	930	560	
+1792682020.426	caption	Feed it the baseline documents	930	560	
+1792682022.840	caption	Feed it the baseline documents	925	565	
+1792682022.843	caption	Output: the register, ready to download	925	565	
+1792682026.269	caption	Output: the register, ready to download	940	329	
+1792682026.273	caption	Output: the register, ready to download	940	329	70,640,300,100
+1792682027.897	caption	Output: the register, ready to download	217	703	70,640,300,100
+1792682028.569	caption	Publish the register	217	703	
+1792682031.467	caption	Publish the register	945	335	
+1792682031.468	caption	Baseline register: done	945	335	
+1792682035.061	end	The baseline register			

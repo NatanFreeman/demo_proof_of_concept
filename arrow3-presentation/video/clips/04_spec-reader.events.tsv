@@ -1,0 +1,49 @@
+1792682052.059	start	A second Hermes, in parallel			
+1792682052.059	chapter	Spec Reader: a second Hermes working in parallel			
+1792682054.065	caption	A second Hermes: its own conversation, working in parallel	945	335	
+1792682054.065	motion	first input			
+1792682057.704	caption	A second Hermes: its own conversation, working in parallel	477	904	
+1792682057.708	caption	Name it Spec Reader	477	904	70,640,300,120
+1792682059.020	caption	Name it Spec Reader	217	703	70,640,300,120
+1792682059.575	caption	Each Hermes gets its own lane colour	217	703	
+1792682060.279	caption	The same Trigger wakes both Hermes	217	703	
+1792682062.903	caption	The same Trigger wakes both Hermes	461	900	
+1792682062.907	caption	Spec Reader, step 1: a Run command	461	900	
+1792682066.883	caption	Spec Reader, step 1: a Run command	717	904	
+1792682066.887	caption	Convert the incoming spec to text	717	904	70,690,290,390
+1792682068.330	caption	Convert the incoming spec to text	210	747	70,690,290,390
+1792682069.068	caption	pandoc: Word to Markdown, one requirement per line	210	747	70,690,290,390
+1792682070.247	caption	pandoc: Word to Markdown, one requirement per line	210	869	70,690,290,390
+1792682071.198	caption	EDK checks the command live: ✓ Command OK	210	869	70,690,290,390
+1792682072.603	caption	The result file is piped on	210	869	70,690,290,390
+1792682073.794	caption	The result file is piped on	210	1019	70,690,290,390
+1792682074.631	caption	Spec Reader runs it	210	1019	
+1792682077.088	caption	Spec Reader runs it	700	935	
+1792682077.093	caption	Search: grep every requirement line	700	935	
+1792682080.406	caption	Search: grep every requirement line	1387	721	
+1792682080.409	caption	Search: every requirement line of the new spec	1387	721	70,640,300,230
+1792682082.242	caption	Search: every requirement line of the new spec	217	703	70,640,300,230
+1792682082.944	caption	…every line with "shall"	217	703	70,640,300,230
+1792682084.081	caption	…every line with "shall"	217	764	70,640,300,230
+1792682084.488	caption	…every line with "shall"	217	764	70,640,300,230
+1792682085.194	caption	Pipe the Markdown into the Search	217	764	
+1792682088.101	caption	Pipe the Markdown into the Search	1370	745	
+1792682088.105	caption	Spec Reader, step 2: a Prompt in plain words	1370	745	
+1792682091.266	caption	Spec Reader, step 2: a Prompt in plain words	940	904	
+1792682091.271	caption	A one-page briefing for management	940	904	70,640,300,270
+1792682092.863	caption	A one-page briefing for management	217	703	70,640,300,270
+1792682093.520	caption	Instructions in plain English	217	703	70,640,300,270
+1792682094.672	caption	Instructions in plain English	217	790	70,640,300,270
+1792682096.388	caption	Instructions in plain English	217	790	70,640,300,270
+1792682097.093	caption	Order: after the conversion (solid arrow)	217	790	
+1792682099.694	caption	Order: after the conversion (solid arrow)	925	935	
+1792682099.697	caption	Input: the converted spec (dashed arrow)	925	935	
+1792682102.078	caption	Input: the converted spec (dashed arrow)	905	940	
+1792682102.082	caption	Publish the briefing	905	940	
+1792682105.336	caption	Publish the briefing	1164	904	
+1792682105.341	caption	Publish the briefing	1164	904	70,640,300,100
+1792682107.080	caption	Publish the briefing	217	703	70,640,300,100
+1792682107.670	caption	Publish the briefing	217	703	
+1792682110.437	caption	Publish the briefing	1150	940	
+1792682110.439	caption	Spec Reader lane: done	1150	940	
+1792682114.062	end	A second Hermes, in parallel			

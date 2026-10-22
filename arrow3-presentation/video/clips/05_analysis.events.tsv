@@ -1,0 +1,34 @@
+1792682128.808	start	The analysis			
+1792682128.808	chapter	Find every inconsistency			
+1792682130.819	caption	Append: join two collections into one	1150	940	
+1792682130.820	motion	first input			
+1792682134.003	caption	Append: join two collections into one	1164	721	
+1792682134.009	caption	The register plus the new requirement lines	1164	721	70,640,300,100
+1792682135.724	caption	The register plus the new requirement lines	217	703	70,640,300,100
+1792682136.662	caption	The baseline register…	217	703	
+1792682139.452	caption	The baseline register…	1150	735	
+1792682139.456	caption	…plus the Spec Reader's requirement lines	1150	735	
+1792682141.893	caption	…plus the Spec Reader's requirement lines	1185	740	
+1792682141.896	caption	Two lanes, one collection	1185	740	
+1792682142.601	caption	Main Hermes, step 2: Read	1185	740	
+1792682145.652	caption	Main Hermes, step 2: Read	1164	537	
+1792682145.656	caption	Read: Hermes studies both, completely	1164	537	70,640,300,100
+1792682147.379	caption	Read: Hermes studies both, completely	217	703	70,640,300,100
+1792682148.249	caption	After the register…	217	703	
+1792682150.981	caption	After the register…	1140	560	
+1792682150.985	caption	…read the joined collection	1140	560	
+1792682153.393	caption	…read the joined collection	1150	575	
+1792682153.396	caption	The main Hermes will wait for the Spec Reader's result automatically	1150	575	
+1792682154.100	caption	The heart of the agent: a Prompt	1150	575	
+1792682156.961	caption	The heart of the agent: a Prompt	1387	537	
+1792682156.965	caption	Find inconsistencies	1387	537	70,640,300,300
+1792682158.859	caption	Find inconsistencies	217	703	70,640,300,300
+1792682159.626	caption	The analyst's brief, in plain English	217	703	70,640,300,300
+1792682160.785	caption	The analyst's brief, in plain English	217	790	70,640,300,300
+1792682165.784	caption	The analyst's brief, in plain English	217	790	70,640,300,300
+1792682167.189	caption	After the Read step	217	790	
+1792682170.100	caption	After the Read step	1370	560	
+1792682170.104	caption	…with the register and the new requirements as input	1370	560	
+1792682172.501	caption	…with the register and the new requirements as input	1360	575	
+1792682172.503	caption	Analysis wired	1360	575	
+1792682176.111	end	The analysis			
