@@ -1,0 +1,293 @@
+{
+ "version": 6,
+ "id": "ca_sgatc6p98qx5",
+ "name": "Find Inconsistencies in Requirements",
+ "description": "Checks every new Arrow 3 specification against all documents uploaded so far, with two Hermes agents working in parallel, and issues an executive Word report of every inconsistency.",
+ "icon": "search",
+ "color": "#0369a1",
+ "graph": {
+  "nodes": [
+   {
+    "id": "hermes",
+    "type": "hermes",
+    "x": 0.0,
+    "y": -40.0,
+    "label": "Hermes",
+    "config": {}
+   },
+   {
+    "id": "nxqzkpwt9h9",
+    "type": "trigger",
+    "x": -300.0,
+    "y": -30.0,
+    "label": "New spec arrives",
+    "config": {
+     "mode": "upload",
+     "pattern": "*.docx"
+    }
+   },
+   {
+    "id": "nal00gaqyi5",
+    "type": "files",
+    "x": 1.0,
+    "y": 191.0,
+    "label": "All uploaded specs",
+    "config": {
+     "source": "workspace",
+     "pattern": "*.docx"
+    }
+   },
+   {
+    "id": "nuuf1cinblu",
+    "type": "filter",
+    "x": 280.0,
+    "y": 191.0,
+    "label": "Baseline only",
+    "config": {
+     "include": "",
+     "exclude": "reports/*",
+     "skip_uploaded": true
+    }
+   },
+   {
+    "id": "naw6f9kl9y3",
+    "type": "index",
+    "x": 280.0,
+    "y": -40.0,
+    "label": "Baseline register",
+    "config": {
+     "instruction": "the document number, revision and title, then every requirement row exactly as printed by: pandoc FILE -t gfm --wrap=none | grep shall",
+     "output": "index/arrow3-baseline.md"
+    }
+   },
+   {
+    "id": "no3iaw6e4c4",
+    "type": "output",
+    "x": 280.0,
+    "y": -300.0,
+    "label": "Baseline register",
+    "config": {}
+   },
+   {
+    "id": "hvw5vahc2g7",
+    "type": "hermes",
+    "x": -300.0,
+    "y": 420.0,
+    "label": "Spec Reader",
+    "config": {}
+   },
+   {
+    "id": "nds8vc83ege",
+    "type": "tool",
+    "x": 1.0,
+    "y": 420.0,
+    "label": "New spec to Markdown",
+    "config": {
+     "tool": "run_command",
+     "target": "pandoc {trigger_file} -t gfm --wrap=none -o {output}",
+     "details": "",
+     "output": "{run_folder}/new-spec.md"
+    }
+   },
+   {
+    "id": "n135i5bmrwk",
+    "type": "search",
+    "x": 840.0,
+    "y": 191.0,
+    "label": "Requirement lines",
+    "config": {
+     "query": "shall",
+     "regex": false,
+     "output": "lines"
+    }
+   },
+   {
+    "id": "nzmbni68ci5",
+    "type": "instruction",
+    "x": 280.0,
+    "y": 420.0,
+    "label": "Spec briefing",
+    "config": {
+     "text": "{files} is the new document {trigger_name} as Markdown. Write a one-page briefing for management in Markdown: what it specifies, one bullet per subsystem with its key values, and the documents and standards it cites."
+    }
+   },
+   {
+    "id": "n2orbz17jm9",
+    "type": "output",
+    "x": 561.0,
+    "y": 420.0,
+    "label": "Spec briefing",
+    "config": {}
+   },
+   {
+    "id": "nrck6wod7r1",
+    "type": "append",
+    "x": 561.0,
+    "y": 191.0,
+    "label": "Register + new requirements",
+    "config": {}
+   },
+   {
+    "id": "n4fwcf49bh5",
+    "type": "read",
+    "x": 561.0,
+    "y": -40.0,
+    "label": "Study register + new spec",
+    "config": {}
+   },
+   {
+    "id": "n1nvhs8z76z",
+    "type": "instruction",
+    "x": 840.0,
+    "y": -40.0,
+    "label": "Find inconsistencies",
+    "config": {
+     "text": "You have just read {files}: the register of every Arrow 3 document uploaded so far and the requirement lines of the new document {trigger_name}. Do not write or run code: reason yourself. Take the new requirements one by one, find the register requirements on the same subject (parent ID or same quantity) and compare them. Report every inconsistency: different values, limits or units, interface mismatches, timeline overruns, environmental or reliability shortfalls, outdated document or standard revisions. Write {output} as a JSON array only, one object per finding, with keys id, severity (Critical, Major or Minor), category, title, new_req, new_text, baseline_req, baseline_doc, baseline_text, impact, recommendation."
+    }
+   },
+   {
+    "id": "nkqdup1ocqr",
+    "type": "tool",
+    "x": 1120.0,
+    "y": -40.0,
+    "label": "Executive Word report",
+    "config": {
+     "tool": "run_command",
+     "target": "python3 consistency_report.py {files} --index index/arrow3-baseline.md --source {trigger_file} -o {output}",
+     "details": "",
+     "output": "reports/{trigger_name}_Consistency_Report.docx"
+    }
+   },
+   {
+    "id": "nalzm6vo4a2",
+    "type": "output",
+    "x": 1120.0,
+    "y": -300.0,
+    "label": "Inconsistency report",
+    "config": {}
+   }
+  ],
+  "edges": [
+   {
+    "id": "ewslx5k4loa",
+    "from": "nxqzkpwt9h9",
+    "to": "hermes",
+    "kind": "flow"
+   },
+   {
+    "id": "ee397wpr0i4",
+    "from": "nal00gaqyi5",
+    "to": "nuuf1cinblu",
+    "kind": "data"
+   },
+   {
+    "id": "e05jkqnzdcx",
+    "from": "hermes",
+    "to": "naw6f9kl9y3",
+    "kind": "flow"
+   },
+   {
+    "id": "ew81ennc1wl",
+    "from": "nuuf1cinblu",
+    "to": "naw6f9kl9y3",
+    "kind": "data"
+   },
+   {
+    "id": "epdqq5koxde",
+    "from": "naw6f9kl9y3",
+    "to": "no3iaw6e4c4",
+    "kind": "data"
+   },
+   {
+    "id": "egzbjd1biu7",
+    "from": "nxqzkpwt9h9",
+    "to": "hvw5vahc2g7",
+    "kind": "flow"
+   },
+   {
+    "id": "e5kzsijvk0p",
+    "from": "hvw5vahc2g7",
+    "to": "nds8vc83ege",
+    "kind": "flow"
+   },
+   {
+    "id": "efyt1mltntz",
+    "from": "nds8vc83ege",
+    "to": "n135i5bmrwk",
+    "kind": "data"
+   },
+   {
+    "id": "eh2mxduydjp",
+    "from": "nds8vc83ege",
+    "to": "nzmbni68ci5",
+    "kind": "flow"
+   },
+   {
+    "id": "el43l9w6372",
+    "from": "nds8vc83ege",
+    "to": "nzmbni68ci5",
+    "kind": "data"
+   },
+   {
+    "id": "eu1jcnzbi9p",
+    "from": "nzmbni68ci5",
+    "to": "n2orbz17jm9",
+    "kind": "data"
+   },
+   {
+    "id": "eawjcfwkn9t",
+    "from": "naw6f9kl9y3",
+    "to": "nrck6wod7r1",
+    "kind": "data"
+   },
+   {
+    "id": "eyukksu43op",
+    "from": "n135i5bmrwk",
+    "to": "nrck6wod7r1",
+    "kind": "data"
+   },
+   {
+    "id": "e8l9uw2c3zd",
+    "from": "naw6f9kl9y3",
+    "to": "n4fwcf49bh5",
+    "kind": "flow"
+   },
+   {
+    "id": "eedpld3417r",
+    "from": "nrck6wod7r1",
+    "to": "n4fwcf49bh5",
+    "kind": "data"
+   },
+   {
+    "id": "eavislebhge",
+    "from": "n4fwcf49bh5",
+    "to": "n1nvhs8z76z",
+    "kind": "flow"
+   },
+   {
+    "id": "ewdle3r9ge5",
+    "from": "n4fwcf49bh5",
+    "to": "n1nvhs8z76z",
+    "kind": "data"
+   },
+   {
+    "id": "e16nksbcgfv",
+    "from": "n1nvhs8z76z",
+    "to": "nkqdup1ocqr",
+    "kind": "flow"
+   },
+   {
+    "id": "ehd5zthft2m",
+    "from": "n1nvhs8z76z",
+    "to": "nkqdup1ocqr",
+    "kind": "data"
+   },
+   {
+    "id": "ebr8k9bopos",
+    "from": "nkqdup1ocqr",
+    "to": "nalzm6vo4a2",
+    "kind": "data"
+   }
+  ]
+ }
+}
