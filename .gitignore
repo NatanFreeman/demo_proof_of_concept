@@ -1,0 +1,12 @@
+# Large media: recorded frames, video clips and renders stay out of git
+arrow3-presentation/frames/
+arrow3-presentation/video/clips/
+arrow3-presentation/video/work/
+*.mkv
+*.mp4
+
+# Python / editor noise
+__pycache__/
+*.pyc
+.~lock.*#
+arrow3-presentation/video/final/parts/
